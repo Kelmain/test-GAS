@@ -8,3 +8,13 @@ function doGet() {
 function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }
+
+
+
+function setParameters(){
+  var scriptProperties = PropertiesService.getScriptProperties();
+  scriptProperties.setProperties({
+    'test': 'test',
+    'test1': 'test1',
+  });
+}
