@@ -2,7 +2,7 @@ var scriptProperties = PropertiesService.getScriptProperties();
 var idDocParameters = scriptProperties.getProperty("id-doc-parameters");
 
 
-function doGet(e) {
+function doGet() {
   var template ;
   if (idDocParameters == null) {
     template = HtmlService.createTemplateFromFile('install');
@@ -25,7 +25,7 @@ function include(filename) {
 
 function installForm(installObject) {
   Logger.log(installObject);
-  var scriptProperties = PropertiesService.getScriptProperties();
+  console.log(installObject);
   var pattern = /[-\w]{25,}/;
   scriptProperties.setProperties({
     'test': 'test',

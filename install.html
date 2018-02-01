@@ -6,13 +6,14 @@
 </head>
 
 <body>
-    <form id="formInstall" onsubmit="handleFormsubmit(this)" name="formInstall" <div>
-        <label for="id-doc-paramters">Id doc parameters:
-
-        </label>
+    <form id="formInstall" onsubmit="handleFormsubmit(this)" name="formInstall">
         <div>
-            <input type="text" name="id-doc-parameters" id="id-doc-paramters" placeholder="Adresse de votre spreadscheet" required>
-        </div>
+            <label for="id-doc-paramters">Id doc parameters:
+
+            </label>
+            <div>
+                <input type="text" name="id-doc-parameters" id="id-doc-paramters" placeholder="Adresse de votre spreadscheet" required>
+            </div>
         </div>
 
         <div id="envoyerFormulaire">
@@ -25,14 +26,20 @@
 
 
     </form>
+    <div id="output"></div>
     <!-- Load the jQuery and jQuery UI libraries. -->
-    <!-- Version original<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script> -->
-    <!-- Version original<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-1.8.3.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script>
+ function onFailure(error) {
+        var div = document.getElementById('output');
+        div.innerHTML = "ERROR: " + error.message;
+      }
+        
         function handleFormSubmit(installObject) {
-            google.script.run.withSuccessHandler("done").installForm(installObject);
+            google.script.run.withFailureHandler(onFailure).installForm(installObject);
         }
         $("#formInstall").submit(function (event) {
             event.preventDefault();
